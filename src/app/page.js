@@ -30,6 +30,9 @@ const FullScreenMobileView = () => {
         alignItems: "flex-start",
       }}
     >
+      {imageDatas.length > 0 && <div className="fixed top-0 left-0 w-[100vw] h-[8vh] shadow-lg bg-white flex justify-start pl-5">
+        <img src="/images.png" alt="logo" className="w-[8vh] h-[8vh] object-contain" /> 
+      </div>}
       {imageDatas.length <= 0 && (
         <div className="VideoAndCanvas">
           <video width={width} style={{ objectFit: "contain" }} />
@@ -129,7 +132,7 @@ const FullScreenMobileView = () => {
         </button>
       )}
       {imageDatas.length > 0 && (
-        <div id="Images" className="flex items-center w-full h-[26vh] pl-5">
+        <div id="Images" className="flex items-center w-full h-[26vh] pl-5 pt-32">
           {imageDatas.map(
             (imageData, index) =>
               imageData.length > 10 && (
@@ -145,7 +148,7 @@ const FullScreenMobileView = () => {
         </div>
       )}
       {imageDatas.length > 0 && (
-        <div className="px-7">
+        <div className="px-5 mx-5 mt-14 my-5 bg-slate-50 border py-5 rounded-lg">
           <Markdown>{markdown}</Markdown>
         </div>
       )}
