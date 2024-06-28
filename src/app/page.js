@@ -5,9 +5,10 @@ import { useWindowSize } from "@tofusoup429/use-window-size";
 import LensSharpIcon from "@mui/icons-material/LensSharp";
 import LoopIcon from "@mui/icons-material/Loop";
 import Typewriter from "typewriter-effect";
-import Markdown from 'react-markdown';
+import Markdown from "react-markdown";
 
-let markdown = "This is a Hilti TE 6-CL rotary hammer.  It is a powerful tool used for drilling, hammering, and chiseling concrete, brick, and other hard materials.\n\nHere are some general instructions on how to use a rotary hammer:\n\n1. **Read the manual:** Before using the tool, carefully read the manufacturer's instructions and safety precautions.\n2. **Choose the right bit:** Select a drill bit or chisel that is appropriate for the material you are working with.\n3. **Set the mode:** Rotary hammers have different modes, such as drilling, hammering, and chiseling. Choose the mode that is right for your task.\n4. **Secure the work piece:** Make sure the work piece is securely clamped or supported.\n5. **Start the tool:** Hold the tool firmly and start it slowly.\n6. **Apply pressure:** As the tool rotates, apply gentle pressure to guide the bit.\n7. **Stop the tool:** When you are finished, release the trigger and let the tool come to a complete stop before setting it down.\n\nRemember to always wear safety glasses, ear protection, and gloves when using a rotary hammer. \n"
+let markdown =
+  "This is a Hilti TE 6-CL rotary hammer.  It is a powerful tool used for drilling, hammering, and chiseling concrete, brick, and other hard materials.\n\nHere are some general instructions on how to use a rotary hammer:\n\n1. **Read the manual:** Before using the tool, carefully read the manufacturer's instructions and safety precautions.\n2. **Choose the right bit:** Select a drill bit or chisel that is appropriate for the material you are working with.\n3. **Set the mode:** Rotary hammers have different modes, such as drilling, hammering, and chiseling. Choose the mode that is right for your task.\n4. **Secure the work piece:** Make sure the work piece is securely clamped or supported.\n5. **Start the tool:** Hold the tool firmly and start it slowly.\n6. **Apply pressure:** As the tool rotates, apply gentle pressure to guide the bit.\n7. **Stop the tool:** When you are finished, release the trigger and let the tool come to a complete stop before setting it down.\n\nRemember to always wear safety glasses, ear protection, and gloves when using a rotary hammer. \n";
 
 const FullScreenMobileView = () => {
   const { width, height } = useWindowSize(); // get window width and height as every time screen resized.
@@ -30,9 +31,15 @@ const FullScreenMobileView = () => {
         alignItems: "flex-start",
       }}
     >
-      {imageDatas.length > 0 && <div className="fixed top-0 left-0 w-[100vw] h-[8vh] shadow-lg bg-white flex justify-start pl-5">
-        <img src="/images.png" alt="logo" className="w-[8vh] h-[8vh] object-contain" /> 
-      </div>}
+      {imageDatas.length > 0 && (
+        <div className="fixed top-0 left-0 w-[100vw] h-[8vh] shadow-lg bg-white flex justify-start pl-5">
+          <img
+            src="/images.png"
+            alt="logo"
+            className="w-[8vh] h-[8vh] object-contain"
+          />
+        </div>
+      )}
       {imageDatas.length <= 0 && (
         <div className="VideoAndCanvas">
           <video width={width} style={{ objectFit: "contain" }} />
@@ -132,20 +139,17 @@ const FullScreenMobileView = () => {
         </button>
       )}
       {imageDatas.length > 0 && (
-        <div id="Images" className="flex items-center w-full h-[35vh] pl-5 pt-32">
-          {imageDatas.map(
-            (imageData, index) =>
-              imageData.length > 10 && (
-                <img
-                  key={index}
-                  src={imageData}
-                  width={300}
-                  height={100}
-                  className="w-[70vw] max-h-[16rem] object-contain border-4 border-red-500"
-                  alt="NoImage"
-                />
-              )
-          )}
+        <div
+          id="Images"
+          className="flex items-center w-full h-[35vh] pl-5 pt-32"
+        >
+          <img
+            src={"img2.jpeg"}
+            width={300}
+            height={100}
+            className="w-[70vw] max-h-[16rem] object-cover border-2 border-red-500"
+            alt="NoImage"
+          />
         </div>
       )}
       {imageDatas.length > 0 && (
