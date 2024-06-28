@@ -132,7 +132,7 @@ const FullScreenMobileView = () => {
         </button>
       )}
       {imageDatas.length > 0 && (
-        <div id="Images" className="flex items-center w-full h-[35vh] pl-5 pt-20">
+        <div id="Images" className="flex items-center w-full h-[35vh] pl-5 pt-32">
           {imageDatas.map(
             (imageData, index) =>
               imageData.length > 10 && (
@@ -149,7 +149,7 @@ const FullScreenMobileView = () => {
         </div>
       )}
       {imageDatas.length > 0 && (
-        <div className="px-5 mx-5 my-5 bg-slate-50 border py-5 rounded-lg">
+        <div className="px-5 mx-5 mt-20 mb-5 bg-slate-50 border py-5 rounded-lg">
           <Markdown>{markdown}</Markdown>
         </div>
       )}
