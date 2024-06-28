@@ -144,7 +144,7 @@ const FullScreenMobileView = () => {
           className="flex items-center w-full h-[35vh] pl-5 pt-32"
         >
           <img
-            src={"img2.jpeg"}
+            src={imageDatas[0]}
             width={300}
             height={100}
             className="w-[70vw] max-h-[16rem] object-cover border-2 border-red-500"
