@@ -140,8 +140,8 @@ const FullScreenMobileView = () => {
                   key={index}
                   src={imageData}
                   width={300}
-                  height={200}
-                  className="w-[70vw] max-h-[25rem] object-contain border border-red-500"
+                  height={100}
+                  className="w-[70vw] max-h-[16rem] object-contain border-4 border-red-500"
                   alt="NoImage"
                 />
               )
@@ -149,7 +149,7 @@ const FullScreenMobileView = () => {
         </div>
       )}
       {imageDatas.length > 0 && (
-        <div className="px-5 mx-5 mt-20 mb-5 bg-slate-50 border py-5 rounded-lg">
+        <div className="px-5 mx-5 mt-16 mb-5 bg-slate-50 border py-5 rounded-lg">
           <Markdown>{markdown}</Markdown>
         </div>
       )}
