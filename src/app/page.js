@@ -203,7 +203,7 @@ const FullScreenMobileView = () => {
             {
               genOutput.tool_usage_steps?.map((item,idx) => {
                 return(
-                  <div className="my-2 flex">
+                  <div key={idx} className="my-2 flex">
                     <span className="font-[600] mr-2">-</span>
                     <Markdown key={idx}>{item}</Markdown>
                   </div>
