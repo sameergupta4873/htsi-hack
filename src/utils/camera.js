@@ -4,6 +4,7 @@ export const useCamera = () => {
     const [videoDem, setVideoDem] = useState({ w: 0, h: 0 });
     const [cameraFacingMode, setCameraFacingMode] = useState('environment');
     const [imageData, setImageData] = useState('');
+    const [imageBlob, setImageBlob] = useState(null);
     let video;
     let canvas;
 
@@ -57,9 +58,15 @@ export const useCamera = () => {
             let context = canvas.getContext('2d');
             context?.drawImage(video, 0, 0, videoDem.w, videoDem.h);
             let imageData1 = canvas.toDataURL('image/png', 1.0);
+            let imageBlob = canvas.toBlob((blob) => {
+                setImageBlob(blob);
+            });
             //console.log('imageData', imageData);
             setImageData(imageData1);
-            return imageData1;
+            return {
+                imageData1,
+                imageBlob
+            };
         } catch (e) {
             console.log(e);
             alert('Error in Capturing Image: ' + e);
@@ -67,5 +74,5 @@ export const useCamera = () => {
         }
     };
 
-    return { cameraFacingMode, switchCameraFacingMode, imageData, captureImage };
+    return { cameraFacingMode, switchCameraFacingMode, imageData, imageBlob,captureImage };
 };

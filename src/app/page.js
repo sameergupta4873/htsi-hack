@@ -6,14 +6,50 @@ import LensSharpIcon from "@mui/icons-material/LensSharp";
 import LoopIcon from "@mui/icons-material/Loop";
 import Typewriter from "typewriter-effect";
 import Markdown from "react-markdown";
+import axios from "axios";
 
 let markdown =
   "This is a Hilti TE 6-CL rotary hammer.  It is a powerful tool used for drilling, hammering, and chiseling concrete, brick, and other hard materials.\n\nHere are some general instructions on how to use a rotary hammer:\n\n1. **Read the manual:** Before using the tool, carefully read the manufacturer's instructions and safety precautions.\n2. **Choose the right bit:** Select a drill bit or chisel that is appropriate for the material you are working with.\n3. **Set the mode:** Rotary hammers have different modes, such as drilling, hammering, and chiseling. Choose the mode that is right for your task.\n4. **Secure the work piece:** Make sure the work piece is securely clamped or supported.\n5. **Start the tool:** Hold the tool firmly and start it slowly.\n6. **Apply pressure:** As the tool rotates, apply gentle pressure to guide the bit.\n7. **Stop the tool:** When you are finished, release the trigger and let the tool come to a complete stop before setting it down.\n\nRemember to always wear safety glasses, ear protection, and gloves when using a rotary hammer. \n";
 
 const FullScreenMobileView = () => {
   const { width, height } = useWindowSize(); // get window width and height as every time screen resized.
-  const { captureImage, imageData, switchCameraFacingMode } = useCamera(); // customHook that contains logics
+  const { captureImage, imageData, imageBlob, switchCameraFacingMode } =
+    useCamera(); // customHook that contains logics
   const [imageDatas, setImageDatas] = useState([]); // capture imageUrls are saved in this state.
+  const [genOutput, setGenOutput] = useState(null);
+  const [error, setError] = useState(null);
+
+  const generateResult = async (blob) => {
+    const formData = new FormData();
+    formData.append("file", blob, "canvas_image.png");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/send_to_gemini", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+
+      // Remove leading/trailing characters and split by newlines
+      const lines = data.content.slice(7, -3).trim().split("\n"); // Adjust indices if needed
+
+      // Remove indentation (assuming consistent indentation)
+      const cleanedLines = lines.map((line) => line.trim());
+
+      // Join cleaned lines back into a single string
+      const jsonString = cleanedLines.join("\n");
+      console.log(jsonString);
+      console.log(JSON.parse(jsonString));
+      const genData = JSON.parse(jsonString);
+      if(!genData.error){
+        setGenOutput(genData);
+      }else{
+        setError(genData.error)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     // whenever imageData changes, which means captureImage is executed, imageUrl is cumulated in the array.
@@ -21,6 +57,12 @@ const FullScreenMobileView = () => {
       setImageDatas([...imageDatas, imageData]);
     }
   }, [imageData]);
+
+  useEffect(() => {
+    if (imageBlob) {
+      generateResult(imageBlob);
+    }
+  }, [imageBlob]);
 
   return (
     <div
@@ -152,10 +194,24 @@ const FullScreenMobileView = () => {
           />
         </div>
       )}
-      {imageDatas.length > 0 && (
-        <div className="px-5 mx-5 mt-16 mb-5 bg-slate-50 border py-5 rounded-lg">
-          <Markdown>{markdown}</Markdown>
-        </div>
+      {imageDatas.length > 0 && genOutput && (
+        <>
+          <div className="px-5 mx-5 mt-16 mb-5 bg-slate-50 border py-5 rounded-lg">
+            <Markdown>{genOutput.tool_details}</Markdown>
+          </div>
+          <div className="px-5 mx-5 mt-2 mb-2 bg-slate-50 border py-5 rounded-lg">
+            {
+              genOutput.tool_usage_steps?.map((item,idx) => {
+                return(
+                  <div className="my-2 flex">
+                    <span className="font-[600] mr-2">-</span>
+                    <Markdown key={idx}>{item}</Markdown>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </>
       )}
     </div>
   );
