@@ -17,7 +17,8 @@
 }
 
 body {
-  
+  max-width: 99vw;
+  overflow-x: hidden;
 }
 
 @layer utilities {
