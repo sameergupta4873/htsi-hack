@@ -30,13 +30,13 @@ const FullScreenMobileView = () => {
         <video width={width} style={{ objectFit: "contain" }} />
         <canvas style={{ opacity: 0 }} />
       </div>
-      <div className="absolute top-[30vh] left-[50vw] transform translate-x-[-50%] translate-y-[-50%] w-[100vw] h-[50vh] flex flex-col justify-between items-center">
+      <div className="absolute top-[35vh] left-[50vw] transform translate-x-[-50%] translate-y-[-50%] w-[100vw] h-[50vh] flex flex-col justify-between items-center">
         <div className="w-[100vw] h-[10vh] px-[10vw] flex justify-between items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={3}
+            strokeWidth={2}
             stroke="white"
             className="w-[6rem] h-[6rem] transform -rotate-[135deg]"
           >
@@ -50,7 +50,7 @@ const FullScreenMobileView = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={3}
+            strokeWidth={2}
             stroke="white"
             className="w-[6rem] h-[6rem] transform -rotate-[45deg]"
           >
@@ -66,7 +66,7 @@ const FullScreenMobileView = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={3}
+            strokeWidth={2}
             stroke="white"
             className="w-[6rem] h-[6rem] transform rotate-[135deg]"
           >
@@ -80,7 +80,7 @@ const FullScreenMobileView = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth={3}
+            strokeWidth={2}
             stroke="white"
             className="w-[6rem] h-[6rem] transform rotate-[45deg]"
           >
