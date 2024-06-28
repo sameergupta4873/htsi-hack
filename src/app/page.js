@@ -24,7 +24,7 @@ const FullScreenMobileView = () => {
     formData.append("file", blob, "canvas_image.png");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/send_to_gemini", {
+      const response = await fetch("http://192.168.95.118:8000/send_to_gemini", {
         method: "POST",
         body: formData,
       });
@@ -201,14 +201,15 @@ const FullScreenMobileView = () => {
           </div>
           <div className="px-5 mx-5 mt-2 mb-2 bg-slate-50 border py-5 rounded-lg">
             {
-              genOutput.tool_usage_steps?.map((item,idx) => {
+              Array.isArray(genOutput.tool_usage_steps) ? genOutput.tool_usage_steps?.map((item,idx) => {
                 return(
                   <div key={idx} className="my-2 flex">
                     <span className="font-[600] mr-2">-</span>
                     <Markdown key={idx}>{item}</Markdown>
                   </div>
                 )
-              })
+              }) : 
+              <Markdown>{genOutput.tool_usage_steps}</Markdown>
             }
           </div>
         </>
